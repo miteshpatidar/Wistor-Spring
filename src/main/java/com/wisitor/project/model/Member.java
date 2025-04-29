@@ -1,6 +1,7 @@
 package com.wisitor.project.model;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,5 +26,6 @@ public class Member {
     private User user;
 
     @OneToMany(mappedBy = "member")
+    @JsonManagedReference
     private List<Visitor> visitors;
 }

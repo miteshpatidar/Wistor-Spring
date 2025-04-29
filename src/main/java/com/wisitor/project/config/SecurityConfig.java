@@ -18,6 +18,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.cors.CorsConfigurationSource;
+
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -43,9 +48,10 @@ public class SecurityConfig {
 
         http.csrf(Customizer->Customizer.disable());
         http.authorizeHttpRequests(request->request
-                .requestMatchers("register","login").permitAll() //-> this will let the register use without authentication
+                .requestMatchers("/register","/login").permitAll() //-> this will let the register use without authentication
                 .anyRequest()
                 .authenticated());
+        http.cors(cors -> {});
         http.httpBasic(Customizer.withDefaults());
         http.sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
      /* call jwtFiter before usenamefileter--> */   http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
@@ -58,4 +64,20 @@ public class SecurityConfig {
         return  authenticationConfiguration.getAuthenticationManager();
     }
 
+
+    /*this allow cross origing at security level. we use it because @Crossorigin only works at controller level
+    * it is required because of jwt auth needed for every request so it send a Option type(not get,post etc) request
+    * which is not allowed at security level so we first enable cors and add following bean*/
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(List.of("http://127.0.0.1:3000")); // or "*"
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+        configuration.setAllowCredentials(true); // only if needed
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
 }
