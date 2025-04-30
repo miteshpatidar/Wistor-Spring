@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wisitor - Guard Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <h1>Welcome, Guard!</h1>
+        <button onclick="logout()">Logout</button>
+
+        <h2>Add New Visitor</h2>
+        <form id="addVisitorForm">
+            <input type="text" id="visitorName" placeholder="Visitor Name" required>
+            <input type="text" id="visitorMobile" placeholder="Mobile" required>
+            <input type="text" id="visitorAddress" placeholder="Address" required>
+            <input type="text" id="visitorReason" placeholder="Reason" required>
+            <input type="text" id="memberName" placeholder="Member Name" required>
+            <input type="text" id="memberAddress" placeholder="Member Address" required>
+            <input type="date" id="visitDate" required>
+            <button type="submit">Add Visitor</button>
+        </form>
+
+        <h2>All Visitors</h2>
+        <table id="visitorTable">
+            <thead>
+                <tr>
+                    <th>Visitor Name</th>
+                    <th>Mobile</th>
+                    <th>Address</th>
+                    <th>Reason</th>
+                    <th>Member Name</th>
+                    <th>Member Address</th>
+                    <th>Visit Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- All visitors populated here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="guard.js"></script>
+</body>
+</html>
