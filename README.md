@@ -18,7 +18,35 @@ steps to run the project:
    
 #Frontend
 
-URL for frontend - 
+
 
 load frontend in browser using localhost url/index.html
+
+
+#FLOW
+
+-> register --> Society Member
+	   |
+	   -->  Guard 
+-> different role have different access 
+-> member can add/update/delete the future visitor/guests
+-> member can only operate their own guests
+-> guard has access to complete visitor table 
+
+
+
+#Tech Used
+1. Spring-boot
+2. Java
+3. OOPs concept
+4. Spring security + JWT
+5. MySql database
+6. Intellije Ide with MAVEN
+7. HTML, CSS, JS for frontend
+
+
+#Entities
+1.Member
+2.Guard
+3.Visitor
 
