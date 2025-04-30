@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wisitor - Member Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <h1>Welcome, Member!</h1>
+        <button onclick="logout()">Logout</button>
+
+        <h2 id="currentAddress">Your Address: Loading...</h2>
+        <button onclick="showUpdateAddressForm()">Update Address</button>
+
+        <div id="updateAddressForm" style="display: none;">
+            <input type="text" id="newAddress" placeholder="Enter new address">
+            <button onclick="updateAddress()">Update</button>
+            <button onclick="hideUpdateAddressForm()">Cancel</button>
+        </div>
+
+        <h2>Your Visitors</h2>
+        <button onclick="showAddVisitorForm()">Add Visitor</button>
+        <table id="visitorTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Mobile</th>
+                    <th>Address</th>
+                    <th>Reason</th>
+                    <th>Visit Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Visitors will be populated here -->
+            </tbody>
+        </table>
+
+        <div id="addVisitorForm" style="display:none;">
+            <h3>Add New Visitor</h3>
+            <input type="text" id="visitorName" placeholder="Visitor Name" required><br>
+            <input type="text" id="visitorMobile" placeholder="Mobile Number" required><br>
+            <input type="text" id="visitorAddress" placeholder="Address" required><br>
+            <input type="text" id="visitorReason" placeholder="Reason for Visit" required><br>
+            <input type="date" id="visitDate" required><br>
+            <button onclick="addVisitor()">Submit</button>
+            <button onclick="hideAddVisitorForm()">Cancel</button>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="member.js"></script>
+</body>
+</html>
