@@ -52,4 +52,30 @@ public class MemberService {
     public void updateVisitor(Visitor visitor) {
         visitorRepo.save(visitor);
     }
+
+    public void updateAddress(HttpServletRequest request,String address) {
+        String token = jwtService.getTokenFromRequest(request);
+        String username = jwtService.extractUserName(token);
+        Member member = memberRepository.findMemberByUser(username);
+        if(member!=null){
+            member.setAddress(address);
+            memberRepository.save(member);
+            System.out.println("address updated ");
+        }
+        else {
+            System.out.println("member is null");
+        }
+
+    }
+
+    public String getAddress(HttpServletRequest request) {
+        String token = jwtService.getTokenFromRequest(request);
+        String username = jwtService.extractUserName(token);
+        Member member = memberRepository.findMemberByUser(username);
+        if(member!=null){
+            String address = member.getAddress();
+            return address;
+        }
+        return null;
+    }
 }

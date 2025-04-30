@@ -2,15 +2,15 @@ package com.wisitor.project.controller;
 
 
 import com.wisitor.project.model.Visitor;
-import com.wisitor.project.service.JwtService;
 import com.wisitor.project.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/member")
@@ -47,5 +47,21 @@ public class MemberController {
         memberService.updateVisitor(visitor);
         return ResponseEntity.ok("Updated Successfully");
     }
+    @PutMapping("/address")
+    public void updateMemberAddress(HttpServletRequest request, @RequestBody Map<String,String> addressPayload){
+        memberService.updateAddress(request,addressPayload.get("address"));
+        System.out.println("address updated "+addressPayload.get("address"));
+    }
+    @GetMapping("/address")
+    public ResponseEntity<Map<String, String>> getMemberAddress(HttpServletRequest request) {
+        String address = memberService.getAddress(request);
+        if (address == null) address = "EARTH";
+
+        Map<String, String> response = new HashMap<>();
+        response.put("address", address);
+
+        return ResponseEntity.ok().body(response);
+    }
+
 
 }

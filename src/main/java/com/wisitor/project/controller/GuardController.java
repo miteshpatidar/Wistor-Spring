@@ -17,7 +17,7 @@ public class GuardController {
     @Autowired
     private GuardService guardService;
 
-    @GetMapping("visitorlist")
+    @GetMapping("visitor")
     public List<Visitor> getVisitorList(){
         return guardService.getVisitorList();
     }
